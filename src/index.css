@@ -1,0 +1,18 @@
+body {
+    margin: auto;
+    max-width: 38rem;
+    padding: 2rem;
+}
+
+h2 {
+    color: rgb(85, 85, 85);
+}
+
+.output-box {
+    background-color: #fff;
+    padding: 2.5rem 1.3rem;
+    border-radius: 0.5rem;
+    margin-bottom: 3rem;
+    height: 200px;
+    overflow: auto;
+}
