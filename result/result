@@ -1,9 +1,0 @@
-Le but de ce projet est de protéger les utilisateurs des virus qu’il pourrait télécharger par inadvertance. Les utilisateurs pourront soit lancer une recherche spécifique sur un ou plusieurs dossiers choisis, soit faire une recherche complète de leur machine. En fonction de l’avancement du projet, l’utilisateur pourra paramétrer une analyse périodique de sa machine. Lorsque le logiciel détecte une application potentiellement dangereuse, l’utilisateur sera sollicité par une boîte de dialogue à faire un choix entre le blocage de l’application ou la laisser passer.
-
-Analyse des besoins non-fonctionnels 
-Spécifications techniques 
-
-
-Tout d’abord, nous devons mettre au point des spécifications techniques. Nous aurons donc besoin d’une machine dotée d’un système d’exploitation Linux, pour tester le bon fonctionnement de l’application.  Ensuite, le commanditaire nous a imposé certaines contraintes. Nous devons utiliser un langage de programmation bas niveau, comme par exemple le C et l’Assembleur. Etant donné que nous avions déjà des bases en langage C et qu’il était assez bas niveau, nous avons donc choisi celui-ci. 
-
-Cette contrainte technique est justifiée par le fait que plus un langage est considéré comme “haut niveau”, plus l’ordinateur devra traduire ce langage successivem
