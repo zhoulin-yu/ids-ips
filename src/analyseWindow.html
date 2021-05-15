@@ -35,13 +35,31 @@
         const {
             ipcRenderer
         } = electron;
+        //----------------------button listener----------------------------------//
+        //----------------------QUARANTINE BUTTON----------------------------------//
 
+        const btnQuarantine = document.getElementById('quarantine');
+        btnQuarantine.addEventListener('click', function() {
+            var arg = 1;
+            ipcRenderer.send("quarantineClick", arg);
+        });
+
+        //----------------------QUARANTINE BUTTON----------------------------------//
+        const btnBlock = document.getElementById('block');
+        btnBlock.addEventListener('click', function() {
+            var arg = 1;
+            ipcRenderer.send("blockClick", arg);
+        });
+
+        // --------------------Catch arg from main.js--------------------------//
         ipcRenderer.on("btnScanAllClick", function(event, arg) {
             const s1 = document.getElementById('s1');
             console.log("test:")
             console.log("from analyseWindow, arg is : " + arg);
             const output = document.createTextNode(arg);
             s1.appendChild(output);
+
+
         });
     </script>
 

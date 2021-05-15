@@ -2,7 +2,7 @@
 #define _BLOCAGE_
 
 // path vers la liste des fichiers contaminés
-#define pathListeContamine "../Analyses/listeContamination.txt"
+#define pathListeContamine "Analyses/listeContamination.txt"
 
 char *search_name_of_file_in_path(char *pathFile);
 int checkIfFileExists(const char *filename);

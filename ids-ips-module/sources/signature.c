@@ -100,7 +100,7 @@ int search_virus_in_File(char *pathFile)
     FILE *baseVirale = fopen(pathBaseVirale, "r");
     if (baseVirale == NULL)
     {
-        // printf("Base virale inexistante ");
+        printf("Base virale inexistante: %s", pathBaseVirale);
         return (-1);
     }
 

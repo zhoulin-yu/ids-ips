@@ -151,7 +151,6 @@ ipcMain.on("btnScanAllClick", function(event, arg) {
 
     }); // end of create a new window
 
-
     analyseWindow.loadFile(path.join(__dirname, 'analyseWindow.html'));
     analyseWindow.show();
     console.log('arg: ', arg);
@@ -163,23 +162,10 @@ ipcMain.on("btnScanAllClick", function(event, arg) {
 
     });
 
-
-
-
-    // inform the render process that the assigned task finished. Show a message in html
-    // event.sender.send in ipcMain will return the reply to renderprocess
 });
-//arg = analyse.first_analysis();
-//arg = 5;
-//mainWindow.webContents.send("btnScanAllClick", arg);
-
-
 
 
 //----------------------- BUTTON 2 ------------------------//
-
-
-
 
 ipcMain.on("btnScan1Click", function(event, arg) {
     //create new window
@@ -219,6 +205,19 @@ ipcMain.on("btnclick", function(event, arg) {
     // event.sender.send in ipcMain will return the reply to renderprocess
     event.sender.send("btnclick-task-finished", "yes");
 });
+
+//-------------------BUTTON 1 OF analyseWIndow---------------------------//
+ipcMain.on("quarantineClick", function(event, arg) {
+    analyse.allQuarantine();
+    console.log("lance quanrantine");
+});
+
+//-------------------BUTTON 2 OF analyseWIndow---------------------------//
+ipcMain.on("blockClick", function(event, arg) {
+    analyse.allBlock();
+    console.log("lance allBlock");
+});
+
 
 //If mac, add empty object to menu
 

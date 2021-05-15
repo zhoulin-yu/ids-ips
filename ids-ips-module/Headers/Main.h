@@ -7,11 +7,11 @@
 //#include "Recherche.h"
 
 //path vers baseVirale
-#define pathBaseVirale "../BaseVirale/basevirale.txt"
+#define pathBaseVirale "BaseVirale/basevirale.txt"
 //** PREREQUIS BASE VIRAL: Chaque pattern de virus doit être sur une ligne **//
 
 // path vers la liste des fichiers contaminés
-#define pathListeContamine "../Analyses/listeContamination.txt"
+#define pathListeContamine "Analyses/listeContamination.txt"
 
 int count_threat();
 int first_analysis();

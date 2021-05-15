@@ -28,6 +28,7 @@ int count_threat()
     FILE *liste = fopen(pathListeContamine, "r");
     if (liste == NULL)
     {
+        printf("can't open: %s\n", pathListeContamine);
         return (-1);
     }
     char data[1024];
@@ -91,6 +92,7 @@ int first_analysis()
     FILE *analyse = fopen(pathAnalyse, "r");
     if (analyse == NULL)
     {
+        printf("can't open file: %s\n", pathAnalyse);
         return (-1);
     }
     char data[1024];
@@ -111,10 +113,11 @@ int first_analysis()
     return count_threat();
 }
 
-// void main()
-// {
-//     //int nombreVirus = first_analysis();
-//     // printf("%d \n", nombreVirus);
-//     //all_quarantine();
-//     //all_block();
-// }
+void main()
+{
+    printf("%s \n", pathAnalyse);
+    int nombreVirus = first_analysis();
+    printf("%d \n", nombreVirus);
+    all_quarantine();
+    all_block();
+}

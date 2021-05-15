@@ -1643,7 +1643,7 @@
   dependencies:
     "safer-buffer" ">= 2.1.2 < 3"
 
-"idsips@file:./ids-ips-module":
+"idsips@file:ids-ips-module":
   "resolved" "file:ids-ips-module"
   "version" "1.0.0"
   dependencies:
