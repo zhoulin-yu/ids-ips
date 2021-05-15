@@ -31,10 +31,10 @@
     <div class="col-md-12">
         <h4>results</h4>
         <div class="output-box">
+            <p id='p0'> Nombtre de virus trouvé : </p>
             <p id='p1'> Some line
             </p>
         </div>
-
     </div>
 
     <script>
@@ -48,29 +48,36 @@
         ipcRenderer.on('item:add', function(e, item) {
             const p = document.getElementById('p1');
             const outputText = document.createTextNode(item);
-            p1.appendChild(outputText);
+            p.appendChild(outputText);
         });
 
+
         ipcRenderer.on('item:clear', function() {
-            p1.innerHTML = '';
+            const p = document.getElementById('p1');
+            p.innerHTML = '';
         });
 
 
         //----------------------button----------------------------------//
         //const testbutton = document.getElementById('Test');
 
-        const btnclick = document.getElementById('setting');
-        btnclick.addEventListener('click', function() {
-            var arg = "secondparam";
-
-            ipcRenderer.send("btnclick", arg);
-
+        const btnScanAll = document.getElementById('scanAll');
+        btnScanAll.addEventListener('click', function() {
+            var arg = -1;
+            ipcRenderer.send("btnScanAllClick", arg);
         });
 
         const btnScan1 = document.getElementById('scan1');
         btnScan1.addEventListener('click', function() {
             var arg = "secondparam";
             ipcRenderer.send("btnScan1Click", arg);
+        });
+        const btnclick = document.getElementById('setting');
+        btnclick.addEventListener('click', function() {
+            var arg = "secondparam";
+
+            ipcRenderer.send("btnclick", arg);
+
         });
     </script>
 

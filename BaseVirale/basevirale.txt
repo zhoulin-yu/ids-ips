@@ -1,0 +1,5 @@
+printf("virus 1\n");
+printf("Je suis le virus 2\n");
+printf("virus 3, le toxic\n");
+printf("JE SUIS UN VIRUS EN MAJUSCULE\n");
+p r i n t f ( " b l a n k  v i r u s \ n ");

@@ -87,3 +87,6 @@ typings/
 
 # Electron-Forge
 out/
+
+#module build folder
+ids-ips-module/build/

@@ -1,5 +1,7 @@
+const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 const electron = require('electron');
 const path = require('path');
+const analyse = require('idsips');
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
 // SET ENV
@@ -127,8 +129,74 @@ const mainMenuTemplate = [{
         }
     ]
 }];
-//-----------------------------Button--------------------//
 
+
+//-----------------------------BUTTONS--------------------//
+//----------------------- BUTTON 1 ------------------------//
+//------------------------Handle create add window----------------//
+
+
+ipcMain.on("btnScanAllClick", function(event, arg) {
+    //create new window
+    var analyseWindow = new BrowserWindow({
+        width: 450,
+        height: 400,
+        show: false,
+        //trun nodeIntegration to true
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
+        }
+
+    }); // end of create a new window
+
+
+    analyseWindow.loadFile(path.join(__dirname, 'analyseWindow.html'));
+    analyseWindow.show();
+    console.log('arg: ', arg);
+    arg = analyse.firstAnalysis();
+
+    analyseWindow.webContents.on('did-finish-load', () => {
+        analyseWindow.webContents.send("btnScanAllClick", arg);
+        console.log("from mains js, arg is : " + arg);
+
+    });
+
+
+
+
+    // inform the render process that the assigned task finished. Show a message in html
+    // event.sender.send in ipcMain will return the reply to renderprocess
+});
+//arg = analyse.first_analysis();
+//arg = 5;
+//mainWindow.webContents.send("btnScanAllClick", arg);
+
+
+
+
+//----------------------- BUTTON 2 ------------------------//
+
+
+
+
+ipcMain.on("btnScan1Click", function(event, arg) {
+    //create new window
+    var newWindow2 = new BrowserWindow({
+        width: 450,
+        height: 300,
+        show: false,
+        webPreferences: {
+            webSecurity: false,
+            plugins: true,
+            nodeIntegration: false
+        }
+    }); // create a new window
+
+    newWindow2.show();
+});
+//----------------------- BUTTON 3 ------------------------//
 ipcMain.on("btnclick", function(event, arg) {
     //create new window
     var newWindow = new BrowserWindow({
@@ -151,23 +219,6 @@ ipcMain.on("btnclick", function(event, arg) {
     // event.sender.send in ipcMain will return the reply to renderprocess
     event.sender.send("btnclick-task-finished", "yes");
 });
-
-ipcMain.on("btnScan1Click", function(event, arg) {
-    //create new window
-    var newWindow2 = new BrowserWindow({
-        width: 450,
-        height: 300,
-        show: false,
-        webPreferences: {
-            webSecurity: false,
-            plugins: true,
-            nodeIntegration: false
-        }
-    }); // create a new window
-
-    newWindow2.show();
-});
-
 
 //If mac, add empty object to menu
 
