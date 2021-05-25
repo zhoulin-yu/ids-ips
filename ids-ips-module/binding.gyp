@@ -9,7 +9,8 @@
         "./sources/Comportement.c",
         "./sources/signature.c",
         "./sources/main.c",
-	"./sources/index.cpp"
+        "./sources/search.c",
+	      "./sources/index.cpp"
       ],
       "include_dirs": [
         "<!@(node -p \"require('node-addon-api').include\")"

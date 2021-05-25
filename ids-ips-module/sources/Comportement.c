@@ -4,6 +4,8 @@
 
 //Inclusion du header de comportement
 #include "../Headers/Comportement.h"
+#include "../Headers/Signature.h"
+
 
 
 int detecterCheminDiff(char nomFichier[TAILLE],char nomFichier2[TAILLE])
@@ -142,6 +144,88 @@ void remplacementDateDansFichier(char nomFichier1[TAILLE],char nomFichier2[TAILL
 	strchr(nouvelleDate,' ');
 	strcat(ligne1,nouvelleDate);
 	//fprintf(file1,"%s",ligne1);
+
+}
+
+int search_in_File_Sans_Traitement(char *pathFile, char *str)
+{
+    int line_num = 0;
+    int find_result = -1;
+    char data[1024];
+
+    FILE *file = fopen(pathFile, "r");
+    if (file == NULL)
+    {
+        return (-2);
+    }
+
+    while (1)
+    {
+        fgets(data, 1024, file);
+		if(feof(file))
+			break;
+        if (strstr(data, str) != NULL)
+        {
+            //printf("Suspect element on line: %s\n", data);
+            find_result++;
+        }
+        line_num++;
+    }
+
+    if (file)
+    {
+        fclose(file);
+    }
+    return find_result;
+}
+
+
+
+
+void creerFichierAnalyse()
+{
+	FILE* new;
+	FILE* comp;
+
+
+	char old[TAILLE];
+	char ligne[200];
+	char ligneChemin[200];
+	char ligneDate[200];
+
+	comp = fopen(pathListeContamine,"w");
+	new = fopen(pathNouvelleAnalyseGlobale,"r");
+
+	strcpy(old,pathAnalyseGlobale);
+	while(1)
+	{
+		fgets(ligne,200,new);		
+	
+		if(feof(new))
+		{
+			break;
+		}
+
+
+		strncpy(ligneChemin,ligne,strlen(ligne)-strlen(strchr(ligne,' ')));
+		strcpy(ligneDate,strchr(ligne,' '));
+		for(int i = 0;ligneDate[i+1] != '\0';i++)		
+			ligneDate[i] = ligneDate[i+1];
+		ligneDate[strlen(ligneDate)-1] = '\0';
+		
+		if(search_in_File_Sans_Traitement(old,ligneChemin) != -1)
+		{		
+			printf("%d", search_in_File_Sans_Traitement(old,ligneDate));
+			if(search_in_File_Sans_Traitement(old,ligneDate) != -1)
+			{
+				fprintf(comp,"%s\n",ligneChemin);
+			}
+		}
+
+		
+
+	}
+
 
 }
 

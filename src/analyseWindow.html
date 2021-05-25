@@ -13,8 +13,7 @@
         <h4>results</h4>
         <div class="output-box">
             <p id='s1'> Nombtre de virus trouvé : </p>
-            <p id='s2'> Some line
-            </p>
+
         </div>
     </div>
 
@@ -25,6 +24,7 @@
             </div>
             <button type="button" class="btn btn-primary btn-lg " id="quarantine">All Quarantine</button>
             <button type="button" class="btn btn-primary btn-lg" id="block">All Block</button>
+            <button type="button" class="btn btn-primary btn-lg" id="donothing">Do Nothing</button>
 
         </p>
         <br>
@@ -50,6 +50,14 @@
             var arg = 1;
             ipcRenderer.send("blockClick", arg);
         });
+
+        //----------------------DONOTHING BUTTON----------------------------------//
+        const btnDoNothing = document.getElementById('donothing');
+        btnDoNothing.addEventListener('click', function() {
+            var arg = 1;
+            ipcRenderer.send("donothingClick", arg);
+        });
+
 
         // --------------------Catch arg from main.js--------------------------//
         ipcRenderer.on("btnScanAllClick", function(event, arg) {

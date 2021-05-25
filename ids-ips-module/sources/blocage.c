@@ -72,13 +72,13 @@ void block_file(char *pathFile)
     }
 }
 
-// void main()
-// {
-//     FILE *fileTest1 = fopen("../Tests/fileTest", "a");
-//     FILE *fileTest2 = fopen("../Tests/fileTest2", "a");
+void main()
+{
+    FILE *fileTest1 = fopen("../Tests/fileTest", "a");
+    FILE *fileTest2 = fopen("../Tests/fileTest2", "a");
 
-//     block_file("../Tests/fileTest");
-//     quarantine_placement("../Tests/fileTest2");
-//     char *name = search_name_of_file_in_path(pathListeContamine);
-//     printf("%s", name);
-// }
+    block_file("../Tests/fileTest");
+    quarantine_placement("../Tests/fileTest2");
+    char *name = search_name_of_file_in_path(pathListeContamine);
+    printf("%s", name);
+}

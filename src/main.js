@@ -1,6 +1,11 @@
 const { SSL_OP_EPHEMERAL_RSA } = require('constants');
 const electron = require('electron');
 const path = require('path');
+//const remote = require('remote'); // Load remote compnent that contains the dialog dependency
+//const dialog = remote.require('dialog'); // Load the dialogs component of the OS
+const fs = require('fs'); // Load the File System to execute our common tasks (CRUD)
+const resFilePath = path.join(__dirname, '../Analyses/listeContamination.txt');
+
 const analyse = require('idsips');
 
 const { app, BrowserWindow, Menu, ipcMain } = electron;
@@ -8,14 +13,15 @@ const { app, BrowserWindow, Menu, ipcMain } = electron;
 //process.env.NODE_ENV = 'production';
 let addWindow;
 let mainWindow;
+let fileWindow;
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', function() {
     mainWindow = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 620,
+        height: 500,
         //trun nodeIntegration to true
         webPreferences: {
             nodeIntegration: true,
@@ -56,8 +62,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 function createAddWindow() {
     // Create the add window.
     addWindow = new BrowserWindow({
-        width: 400,
-        height: 400,
+        width: 620,
+        height: 500,
         title: 'Add file to scan',
         //trun nodeIntegration to true
         webPreferences: {
@@ -78,12 +84,8 @@ function createAddWindow() {
         addWindow = null;
     })
 }
-//--------------------------------Catch item:add--------------------------//
 
-ipcMain.on('item:add', function(e, item) {
-    mainWindow.webContents.send('item:add', item);
-    addWindow.close();
-});
+
 //---------------------------------------------------------------//
 
 
@@ -133,14 +135,14 @@ const mainMenuTemplate = [{
 
 //-----------------------------BUTTONS--------------------//
 //----------------------- BUTTON 1 ------------------------//
-//------------------------Handle create add window----------------//
+//------------------------Handle create analyseWindow----------------//
 
 
 ipcMain.on("btnScanAllClick", function(event, arg) {
     //create new window
     var analyseWindow = new BrowserWindow({
-        width: 450,
-        height: 400,
+        width: 620,
+        height: 500,
         show: false,
         //trun nodeIntegration to true
         webPreferences: {
@@ -155,6 +157,15 @@ ipcMain.on("btnScanAllClick", function(event, arg) {
     analyseWindow.show();
     console.log('arg: ', arg);
     arg = analyse.firstAnalysis();
+    // call analysis_treatment()
+    if (arg >= 1) {
+        const content = fs.readFileSync(resFilePath, 'utf8').toString().split(/\r?\n/);
+        console.log('content= ' + content);
+        const lineBreak = '<br>';
+        arg = arg + lineBreak + "les fichier infecté : " + lineBreak + content;
+        console.log('arg= ' + arg);
+    }
+
 
     analyseWindow.webContents.on('did-finish-load', () => {
         analyseWindow.webContents.send("btnScanAllClick", arg);
@@ -169,25 +180,62 @@ ipcMain.on("btnScanAllClick", function(event, arg) {
 
 ipcMain.on("btnScan1Click", function(event, arg) {
     //create new window
-    var newWindow2 = new BrowserWindow({
-        width: 450,
-        height: 300,
+    fileWindow = new BrowserWindow({
+        width: 620,
+        height: 500,
         show: false,
+        //trun nodeIntegration to true
         webPreferences: {
-            webSecurity: false,
-            plugins: true,
-            nodeIntegration: false
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
         }
-    }); // create a new window
 
-    newWindow2.show();
+    }); // end of create a new window
+
+    fileWindow.loadFile(path.join(__dirname, 'fileWindow.html'));
+    fileWindow.show();
+    fileWindow.on('close', function() {
+        fileWindow = null;
+    })
 });
+
+ipcMain.on("item:add", function(event, item) {
+    //create new window
+    var analyseWindow = new BrowserWindow({
+        width: 620,
+        height: 500,
+        show: false,
+        //trun nodeIntegration to true
+        webPreferences: {
+            nodeIntegration: true,
+            contextIsolation: false,
+            enableRemoteModule: true,
+        }
+
+    }); // end of create a new window
+
+    analyseWindow.loadFile(path.join(__dirname, 'analyseWindow.html'));
+    analyseWindow.show();
+    console.log('from main.js, before calling folderAnalysis, item: ', item);
+    item = analyse.folderAnalysis(item);
+
+    analyseWindow.webContents.on('did-finish-load', () => {
+        analyseWindow.webContents.send("btnScanAllClick", item);
+        console.log("from mains js, item is : " + item);
+
+    });
+    fileWindow.close();
+
+});
+
+
 //----------------------- BUTTON 3 ------------------------//
 ipcMain.on("btnclick", function(event, arg) {
     //create new window
     var newWindow = new BrowserWindow({
-        width: 450,
-        height: 300,
+        width: 620,
+        height: 500,
         show: false,
         webPreferences: {
             webSecurity: false,
@@ -217,6 +265,17 @@ ipcMain.on("blockClick", function(event, arg) {
     analyse.allBlock();
     console.log("lance allBlock");
 });
+
+//-------------------BUTTON 3 OF analyseWIndow---------------------------//
+ipcMain.on("donothingClick", function(event, arg) {
+    analyse.removeAnalyseAndListeContamine();
+    console.log("lance removeAnalyseAndListeContamine");
+});
+
+
+//-------------------Read File---------------------------------//
+
+
 
 
 //If mac, add empty object to menu

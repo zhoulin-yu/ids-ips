@@ -1,2 +1,1 @@
 /Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests/fichierContamine
-/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests/fichierContamine

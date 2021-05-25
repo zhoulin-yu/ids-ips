@@ -4,7 +4,7 @@
 #include "Blocage.h"
 #include "Signature.h"
 #include "Comportement.h"
-//#include "Recherche.h"
+#include "search.h"
 
 //path vers baseVirale
 #define pathBaseVirale "BaseVirale/basevirale.txt"
@@ -13,11 +13,18 @@
 // path vers la liste des fichiers contaminés
 #define pathListeContamine "Analyses/listeContamination.txt"
 
+//path vers fichiers analyses
+#define pathAnalyse "Analyses/analyse.txt"
+#define pathAnalyseGlobale "Analyses/analyseGlobale.txt"
+#define pathNouvelleAnalyseGlobale "Analyses/nouvelleAnalyseGlobale.txt"
+
 int count_threat();
-int first_analysis();
+int analysis_treatment();
+int local_analysis(char *arg[]);
 void all_quarantine();
 char *search_and_keep_path(char *pathFile, int line);
 void all_block();
+void remove_analyse_and_listeContamine();
 
 
 

@@ -5,7 +5,7 @@
 
 //Inclusion des headers
 #include "../Headers/Main.h"
-//#include "../Headers/Recherche.h"
+#include "../Headers/search.h"
 #include "../Headers/Signature.h"
 #include "../Headers/Comportement.h"
 #include "../Headers/Blocage.h"
@@ -17,8 +17,10 @@
 // path vers la liste des fichiers contaminés
 #define pathListeContamine "Analyses/listeContamination.txt"
 
-//path vers fichier analyse
-#define pathAnalyse "Analyses/Analyse.txt"
+//path vers fichiers analyses
+#define pathAnalyse "Analyses/analyse.txt"
+#define pathAnalyseGlobale "Analyses/analyseGlobale.txt"
+#define pathNouvelleAnalyseGlobale "Analyses/nouvelleAnalyseGlobale.txt"
 
 // Cette fonction permet d'incrémenter un compteur de fichier infecté.
 //retourne le nombre de fichier infecté
@@ -28,7 +30,6 @@ int count_threat()
     FILE *liste = fopen(pathListeContamine, "r");
     if (liste == NULL)
     {
-        printf("can't open: %s\n", pathListeContamine);
         return (-1);
     }
     char data[1024];
@@ -72,6 +73,8 @@ void all_quarantine()
         pathInfecte = search_and_keep_path(pathListeContamine,i);
         quarantine_placement(pathInfecte);
     }
+
+    remove_analyse_and_listeContamine();
 }
 
 
@@ -84,40 +87,116 @@ void all_block()
         pathInfecte = search_and_keep_path(pathListeContamine, i);
         block_file(pathInfecte);
     }
+
+    remove_analyse_and_listeContamine();
 }
 
-int first_analysis()
+//si analyse globale existe alors ce n'est pas la première analyse et on peut donc faire une analyse par comportement sinon on fait qu'une analyse par signature
+int analysis_treatment()
 {
-    //recherche_global
-    FILE *analyse = fopen(pathAnalyse, "r");
-    if (analyse == NULL)
-    {
-        printf("can't open file: %s\n", pathAnalyse);
-        return (-1);
-    }
-    char data[1024];
-    char *tmp = NULL;
+    if(checkIfFileExists(pathAnalyseGlobale == 1)){
 
-    while (fgets(data, 1024, analyse) != NULL)
-    {
-        if (tmp = strstr(data, "\n"))
+        //recherche_global
+        //analyse par comportement
+        char *arg[10];
+        arg[0] = "/";
+        int typeAnalyse = lancementAnalyse(2,"/");
+        FILE *analyse = fopen(pathAnalyse, "r");
+        if (analyse == NULL)
         {
-            *tmp = '\0';
+            return (-1);
         }
-        search_virus_in_File(data);
+        
+        creerFichierAnalyse();
+        char data[1024];
+        char *tmp = NULL;
+
+        while (fgets(data, 1024, analyse) != NULL)
+        {
+            if (tmp = strstr(data, "\n"))
+            {
+                *tmp = '\0';
+            }
+            search_virus_in_File(data);
+        }
+        if (analyse)
+        {
+            fclose(analyse);
+        }
+    } else {
+        //recherche_global
+        char *arg[10];
+        arg[0] = "/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests";
+        //arg[0] = "/";
+        int typeAnalyse = lancementAnalyse(2,arg);
+
+        FILE *analyse = fopen(pathAnalyse, "r");
+        if (analyse == NULL)
+        {
+            return (-1);
+        }
+        char data[1024];
+        char *tmp = NULL;
+
+        while (fgets(data, 1024, analyse) != NULL)
+        {
+            if (tmp = strstr(data, " \n"))
+            {
+                *tmp = '\0';
+            }
+            search_virus_in_File(data);
+        }
+        if (analyse)
+        {
+            fclose(analyse);
+        }
     }
-    if (analyse)
-    {
-        fclose(analyse);
-    }
+    
     return count_threat();
 }
 
-void main()
-{
-    printf("%s \n", pathAnalyse);
-    int nombreVirus = first_analysis();
-    printf("%d \n", nombreVirus);
-    all_quarantine();
-    all_block();
+//fonction permettant de faire une analyse locale 
+int local_analysis(char *arg[]){
+        int typeAnalyse = lancementAnalyse(2,arg);
+        FILE *analyse = fopen(pathAnalyse, "r");
+        int res;
+        if (analyse == NULL)
+        {
+            res = -1;
+        }
+
+        char data[1024];
+        char *tmp = NULL;
+        while (fgets(data, 1024, analyse) != NULL)
+        {
+            if (tmp = strstr(data, "\n"))
+            {
+                *tmp = '\0';
+            }
+            res = search_virus_in_File(data);
+        }
+        if (analyse)
+        {
+            fclose(analyse);
+        }
+        return res;
 }
+
+void remove_analyse_and_listeContamine(){
+    if (checkIfFileExists(pathAnalyse) == 1)
+    {
+        remove(pathAnalyse);
+    }
+    if (checkIfFileExists(pathListeContamine) == 1)
+    {
+        remove(pathListeContamine);
+    }
+} 
+
+// void main()
+// {
+//     int nombreVirus = analysis_treatment();
+//     printf("%d \n", nombreVirus);
+//     //all_quarantine();
+//     //all_block();
+// }
