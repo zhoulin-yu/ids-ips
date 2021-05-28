@@ -4,7 +4,7 @@ Le projet fini est emballé (package) en application pour s’exécuter directem
 1.Télécharger l'application
 Ils se trouvent par le link suivant: 
 OS: https://www.icloud.com/iclouddrive/0V1y88-Z6-XZb9_UEraXen37A#ids-ips-darwin-x64
-Linux: https://discord.com/channels/@me/835847437708951553/847555562657153055
+Linux: https://www.icloud.com/iclouddrive/0uvw3nvrak28QmnzdesJYywag#electron-tutorial-app-linux-x64
 
 2.Lancer l’application ids-ips
 OS: Dans le dossier /ids-ips-darwin-x64, cliquez directement sur l'icône d’ids-ips pour lancer l’application.
