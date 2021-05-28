@@ -11,7 +11,7 @@
 <body style="background-color:WhiteSmoke;">
 
     <div align="center">
-        <img src="./assets/logo.png" alt="logo" />
+        <img src="../assets/icons/logo.png" alt="icon">
         <h2>Système de détection d'intrusion</h2>
     </div>
 
@@ -22,18 +22,25 @@
             </div>
             <button type="button" class="btn btn-primary btn-lg " id="scanAll">Analyser Tout</button>
             <button type="button" class="btn btn-primary btn-lg" id="scan1">Analyser un dossier</button>
-            <button type="button" class="btn btn-primary btn-lg" id="setting">Paramètrer</button>
+<<<<<<< HEAD
+<<<<<<< HEAD
+            <!--
+            <button type="button" class="btn btn-primary btn-lg" id="setting">Àpropos</button>
+            -->
+=======
+            <button type="button" class="btn btn-primary btn-lg" id="setting">Àpropos</button>
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+=======
+            <button type="button" class="btn btn-primary btn-lg" id="setting">Àpropos</button>
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
         </p>
         <br>
         <br>
     </div>
 
     <div class="col-md-12">
-        <h4>results</h4>
+        <h4>Console</h4>
         <div class="output-box">
-            <p id='p0'> Nombtre de virus trouvé : </p>
-            <p id='p1'> Some line
-            </p>
         </div>
     </div>
 
@@ -42,20 +49,6 @@
         const {
             ipcRenderer
         } = electron;
-
-
-
-        ipcRenderer.on('item:add', function(e, item) {
-            const p = document.getElementById('p1');
-            const outputText = document.createTextNode(item);
-            p.appendChild(outputText);
-        });
-
-
-        ipcRenderer.on('item:clear', function() {
-            const p = document.getElementById('p1');
-            p.innerHTML = '';
-        });
 
 
         //----------------------button----------------------------------//

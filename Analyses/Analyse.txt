@@ -1,2 +1,7 @@
-/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests/fichierContamine
-/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests/fichierClean
+<<<<<<< HEAD
+/Users/Zhoulin/Tests/fichierContamine 
+/Users/Zhoulin/Tests/fichierClean 
+=======
+/Users/Zhoulin/Dev/Gui/Electron/my-new-app/Tests/fichierContamine 
+/Users/Zhoulin/Dev/Gui/Electron/my-new-app/Tests/fichierClean 
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa

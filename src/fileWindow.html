@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add file</title>
+</head>
+
+<body style="background-color:WhiteSmoke;">
+<<<<<<< HEAD
+    <br>
+    <br>
+=======
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+    <form>
+        <div>
+            <label>Choisir le fichier</label>
+            <input type="text" id="item" autofocus>
+<<<<<<< HEAD
+            <button type="submit">add submit</button>
+        </div>
+
+=======
+        </div>
+        <button type="submit">add submit</button>
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+    </form>
+    <script>
+        const electron = require('electron');
+        const {
+            ipcRenderer
+        } = electron;
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(e) {
+            e.preventDefault();
+            const item = document.querySelector('#item').value;
+            ipcRenderer.send('item:add', item);
+            console.log('test from fileWindow: item is ' + item);
+        }
+    </script>
+
+</body>
+
+</html>

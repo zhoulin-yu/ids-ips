@@ -1,2 +1,8 @@
+<<<<<<< HEAD
+/Users/Zhoulin/Tests/fichierContamine
+=======
 /Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests/fichierContamine
-/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests/fichierContamine
+<<<<<<< HEAD
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+=======
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa

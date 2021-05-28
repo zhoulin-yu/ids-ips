@@ -13,8 +13,7 @@
         <h4>results</h4>
         <div class="output-box">
             <p id='s1'> Nombtre de virus trouvé : </p>
-            <p id='s2'> Some line
-            </p>
+
         </div>
     </div>
 
@@ -23,8 +22,18 @@
             <div class="col-md-4">
 
             </div>
+<<<<<<< HEAD
+            <button type="button" class="btn btn-primary btn-lg " id="quarantine">Mettre en pause</button>
+            <button type="button" class="btn btn-primary btn-lg" id="block">Arrêter</button>
+            <button type="button" class="btn btn-primary btn-lg" id="donothing">Rien faire</button>
+=======
             <button type="button" class="btn btn-primary btn-lg " id="quarantine">All Quarantine</button>
             <button type="button" class="btn btn-primary btn-lg" id="block">All Block</button>
+            <button type="button" class="btn btn-primary btn-lg" id="donothing">Do Nothing</button>
+<<<<<<< HEAD
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+=======
+>>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
 
         </p>
         <br>
@@ -50,6 +59,14 @@
             var arg = 1;
             ipcRenderer.send("blockClick", arg);
         });
+
+        //----------------------DONOTHING BUTTON----------------------------------//
+        const btnDoNothing = document.getElementById('donothing');
+        btnDoNothing.addEventListener('click', function() {
+            var arg = 1;
+            ipcRenderer.send("donothingClick", arg);
+        });
+
 
         // --------------------Catch arg from main.js--------------------------//
         ipcRenderer.on("btnScanAllClick", function(event, arg) {
