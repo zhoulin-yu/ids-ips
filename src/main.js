@@ -57,42 +57,6 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 
 
-<<<<<<< HEAD
-=======
-
-//------------------------Handle create add window----------------//
-function createAddWindow() {
-    // Create the add window.
-    addWindow = new BrowserWindow({
-        width: 620,
-        height: 500,
-        title: 'Add file to scan',
-        //trun nodeIntegration to true
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true,
-        }
-    });
-
-    // and load the index.html of the app.
-    addWindow.loadFile(path.join(__dirname, 'addWindow.html'));
-
-    // Open the DevTools.
-    addWindow.webContents.openDevTools();
-
-    //Garbage collection handle
-    addWindow.on('close', function() {
-        addWindow = null;
-    })
-}
-
-
-//---------------------------------------------------------------//
-
-
-
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -126,15 +90,8 @@ const mainMenuTemplate = [{
 }];
 
 
-<<<<<<< HEAD
 //-----------------------------INDEX.html------------------------------//
 //----------------------- BUTTON 1 Analyse Tout------------------------//
-=======
-//-----------------------------BUTTONS--------------------//
-//----------------------- BUTTON 1 ------------------------//
-//------------------------Handle create analyseWindow----------------//
-
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
 
 ipcMain.on("btnScanAllClick", function(event, arg) {
     //create analyseWindow 
@@ -159,18 +116,8 @@ ipcMain.on("btnScanAllClick", function(event, arg) {
     if (arg >= 1) {
         const content = fs.readFileSync(resFilePath, 'utf8').toString().split(/\r?\n/);
         console.log('content= ' + content);
-<<<<<<< HEAD
-<<<<<<< HEAD
         const lineBreak = '                                                                ';
         arg = arg + lineBreak + " Les fichiers infectés :           " + lineBreak + content;
-=======
-        const lineBreak = '<br>';
-        arg = arg + lineBreak + "les fichier infecté : " + lineBreak + content;
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
-=======
-        const lineBreak = '<br>';
-        arg = arg + lineBreak + "les fichier infecté : " + lineBreak + content;
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
         console.log('arg= ' + arg);
     }
 
@@ -196,10 +143,6 @@ ipcMain.on("btnScan1Click", function(event, arg) {
             nodeIntegration: true,
             contextIsolation: false,
             enableRemoteModule: true,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
         }
 
     }); // end of create a new window
@@ -211,53 +154,6 @@ ipcMain.on("btnScan1Click", function(event, arg) {
     })
 });
 
-ipcMain.on("item:add", function(event, item) {
-    //create new window
-    var analyseWindow = new BrowserWindow({
-        width: 620,
-        height: 500,
-        show: false,
-        //trun nodeIntegration to true
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true,
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
-        }
-
-    }); // end of create a new window
-
-<<<<<<< HEAD
-    fileWindow.loadFile(path.join(__dirname, 'fileWindow.html'));
-    fileWindow.show();
-    fileWindow.on('close', function() {
-        fileWindow = null;
-    })
-});
-
-ipcMain.on("item:add", function(event, item) {
-    //create new window
-    var analyseWindow = new BrowserWindow({
-        width: 620,
-        height: 500,
-        show: false,
-        //trun nodeIntegration to true
-        webPreferences: {
-            nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true,
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
-        }
-
-    }); // end of create a new window
-
-<<<<<<< HEAD
-    fileWindow.loadFile(path.join(__dirname, 'fileWindow.html'));
-    fileWindow.show();
-    fileWindow.on('close', function() {
-        fileWindow = null;
-    })
-});
 
 ipcMain.on("item:add", function(event, item) {
     //create new window
@@ -274,8 +170,6 @@ ipcMain.on("item:add", function(event, item) {
 
     }); // end of create a new window
 
-=======
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
     analyseWindow.loadFile(path.join(__dirname, 'analyseWindow.html'));
     analyseWindow.show();
     console.log('from main.js, before calling folderAnalysis, item: ', item);
@@ -291,27 +185,8 @@ ipcMain.on("item:add", function(event, item) {
 });
 
 
-<<<<<<< HEAD
 //----------------------- BUTTON 3 Github Web ------------------------//
 /*
-=======
-=======
-    analyseWindow.loadFile(path.join(__dirname, 'analyseWindow.html'));
-    analyseWindow.show();
-    console.log('from main.js, before calling folderAnalysis, item: ', item);
-    item = analyse.folderAnalysis(item);
-
-    analyseWindow.webContents.on('did-finish-load', () => {
-        analyseWindow.webContents.send("btnScanAllClick", item);
-        console.log("from mains js, item is : " + item);
-
-    });
-    fileWindow.close();
-
-});
-
-
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
 //----------------------- BUTTON 3 ------------------------//
 >>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
 ipcMain.on("btnclick", function(event, arg) {

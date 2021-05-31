@@ -95,10 +95,7 @@ void all_block()
 int analysis_treatment()
 {
     if(checkIfFileExists(pathAnalyseGlobale == 1)){
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+
 
         //recherche_global
         //analyse par comportement
@@ -130,13 +127,8 @@ int analysis_treatment()
     } else {
         //recherche_global
         char *arg[10];
-<<<<<<< HEAD
         //arg[0] = "/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests";
         arg[0] = "/";
-=======
-        arg[0] = "/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests";
-        //arg[0] = "/";
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
         int typeAnalyse = lancementAnalyse(2,arg);
 
         FILE *analyse = fopen(pathAnalyse, "r");
@@ -166,7 +158,6 @@ int analysis_treatment()
 
 //fonction permettant de faire une analyse locale 
 int local_analysis(char *arg[]){
-<<<<<<< HEAD
     if(checkIfFileExists(pathAnalyseGlobale == 1)){
 
         //recherche_global
@@ -214,103 +205,6 @@ int local_analysis(char *arg[]){
                 *tmp = '\0';
             }
             search_virus_in_File(data);
-=======
-        int typeAnalyse = lancementAnalyse(2,arg);
-        FILE *analyse = fopen(pathAnalyse, "r");
-        int res;
-        if (analyse == NULL)
-        {
-            res = -1;
-        }
-
-        char data[1024];
-        char *tmp = NULL;
-        while (fgets(data, 1024, analyse) != NULL)
-        {
-            if (tmp = strstr(data, "\n"))
-            {
-                *tmp = '\0';
-            }
-            res = search_virus_in_File(data);
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
-        }
-        if (analyse)
-        {
-            fclose(analyse);
-        }
-<<<<<<< HEAD
-    }
-    
-    return count_threat();
-        
-=======
-        return res;
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
-}
-
-void remove_analyse_and_listeContamine(){
-    if (checkIfFileExists(pathAnalyse) == 1)
-    {
-        remove(pathAnalyse);
-    }
-    if (checkIfFileExists(pathListeContamine) == 1)
-    {
-        remove(pathListeContamine);
-<<<<<<< HEAD
-    }
-} 
-
-=======
-
-        //recherche_global
-        //analyse par comportement
-        char *arg[10];
-        arg[0] = "/";
-        int typeAnalyse = lancementAnalyse(2,"/");
-        FILE *analyse = fopen(pathAnalyse, "r");
-        if (analyse == NULL)
-        {
-            return (-1);
-        }
-        
-        creerFichierAnalyse();
-        char data[1024];
-        char *tmp = NULL;
-
-        while (fgets(data, 1024, analyse) != NULL)
-        {
-            if (tmp = strstr(data, "\n"))
-            {
-                *tmp = '\0';
-            }
-            search_virus_in_File(data);
-        }
-        if (analyse)
-        {
-            fclose(analyse);
-        }
-    } else {
-        //recherche_global
-        char *arg[10];
-        arg[0] = "/Users/Zhoulin/Dev/GUI/Electron/my-new-app/Tests";
-        //arg[0] = "/";
-        int typeAnalyse = lancementAnalyse(2,arg);
-
-        FILE *analyse = fopen(pathAnalyse, "r");
-        if (analyse == NULL)
-        {
-            return (-1);
-        }
-        char data[1024];
-        char *tmp = NULL;
-
-        while (fgets(data, 1024, analyse) != NULL)
-        {
-            if (tmp = strstr(data, " \n"))
-            {
-                *tmp = '\0';
-            }
-            search_virus_in_File(data);
         }
         if (analyse)
         {
@@ -319,33 +213,7 @@ void remove_analyse_and_listeContamine(){
     }
     
     return count_threat();
-}
-
-//fonction permettant de faire une analyse locale 
-int local_analysis(char *arg[]){
-        int typeAnalyse = lancementAnalyse(2,arg);
-        FILE *analyse = fopen(pathAnalyse, "r");
-        int res;
-        if (analyse == NULL)
-        {
-            res = -1;
-        }
-
-        char data[1024];
-        char *tmp = NULL;
-        while (fgets(data, 1024, analyse) != NULL)
-        {
-            if (tmp = strstr(data, "\n"))
-            {
-                *tmp = '\0';
-            }
-            res = search_virus_in_File(data);
-        }
-        if (analyse)
-        {
-            fclose(analyse);
-        }
-        return res;
+        
 }
 
 void remove_analyse_and_listeContamine(){
@@ -359,12 +227,8 @@ void remove_analyse_and_listeContamine(){
     }
 } 
 
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
-=======
-    }
-} 
 
->>>>>>> e607fce38f437c888e6cbc6a3388e70b4de521aa
+
 // void main()
 // {
 //     int nombreVirus = analysis_treatment();
