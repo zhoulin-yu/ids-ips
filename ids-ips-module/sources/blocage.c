@@ -40,7 +40,7 @@ int checkIfFileExists(const char *filename)
 //retourne rien mais fait de la gestion de fichier
 void quarantine_placement(char *pathFile)
 {
-    char *quarantine = "../quarantaine/";
+    char *quarantine = "quarantaine";
     if (checkIfFileExists(pathFile) == 1)
     {
         chmod(pathFile, 0000000);
